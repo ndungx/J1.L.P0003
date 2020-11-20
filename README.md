@@ -89,27 +89,32 @@ program.
   * This function loads product list information from the file into Collection.
   * The application displays product list information on the screen. For example:
   Products listing:
+  ```
   | ++ No ++ | ++ Product name ++ | ++ Price ++ |
        1             Coconut           2.5 $
        2             Coffee            3.5 $
        3             Candy             4.0 $
        4             Sugar             3.5 $
+   ```
   * Application asks user to go back to the main menu.
 #### ▪ Function 5.2: Order product – 50 LOC
   * To order, customer selects a product, for example: when customer selects No 1, the program shows:
   You selected: Coconut
   Please input quantity:
   * After customer inputs quantity of product, the program shows message: Do you want to order now (Y/N). If customer selects N, the program returns to product list to continue ordering. If select Y, the program displays:
+  ```
   |++Product ++| ++Quantity++ |++ Price++ |++ Amount++|
      Coconut          3           2.5 $        7.5 $
   Total: 7.5 $
   Input your name:
+  ```
   * Customer inputs his/her name to finish ordering.
   * Order detail will be add in to the order list, who buy how many products.
   * Ask to go back to the main menu.
   
 ### ▪ Function 6: View order list - 50 LOC
   * Print all order detail in order list on the screen. For example:
+  ```
   Customer: Marry Le
   Product | Quantity | Price | Amount
   1. Apple      3      1.5 $    4.5 $
@@ -121,6 +126,7 @@ program.
   1.Sugar      3       3.5 $   11.5 $
   2.Coffee     2       3.5 $    7 $
   Total: 13 $
+  ```
   * Application asks user to go back to the main menu.
 
 ### ▪ Function 7: Read file - 50 LOC
