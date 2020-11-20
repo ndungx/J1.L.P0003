@@ -25,16 +25,12 @@ has opened and the contents had read into the collection, close the file and dis
 
   1. Add new category
   2. Update category
-  
     2.1 Update category
     2.2 Delete category
-    
   3. Add new product
   4. Update product
-  
     4.1 Update product
     4.2 Delete category
-    
   5. Order product
   6. Show order list report
   Others- Quit Program
