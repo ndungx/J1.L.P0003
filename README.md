@@ -2,22 +2,22 @@
 
 
 
-##LAB211 Assignment
+#LAB211 Assignment
 
   Type: Long Assignment
   Code: J1.L.P0003
   LOC: 400++
   Slot(s): N/A
 
-##Title
+#Title
 
   Manage product – Read and Write File.
 
-##Background
+#Background
 
   In this assignment you are to write a program that will maintain a product management using collection and file.
 
-##Program Specifications
+#Program Specifications
 
   Your program should first ask the user the name of the text file that contains the category information and
 product information. Then, it should open the file and read its contents into a collection of item structures. After the file
@@ -39,7 +39,7 @@ has opened and the contents had read into the collection, close the file and dis
 must display the menu after each task and wait for the user to select another option until the user chooses to quit the
 program.
 
-##Features:
+#Features:
 
   This system contains the following functions:
   Display a menu and ask users to select an option.
