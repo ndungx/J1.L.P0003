@@ -120,8 +120,8 @@ program.
   ```
   Customer: Marry Le
   Product | Quantity | Price | Amount
-  1. Apple      3      1.5 $    4.5 $
-  2. Candy      2      2.5 $     5 $
+  1.Apple      3       1.5 $    4.5 $
+  2.Candy      2       2.5 $     5 $
   Total: 9.5 $
   --------------------------------------------------------
   Customer: Tony Dung
