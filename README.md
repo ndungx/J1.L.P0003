@@ -22,7 +22,7 @@
   Your program should first ask the user the name of the text file that contains the category information and
 product information. Then, it should open the file and read its contents into a collection of item structures. After the file
 has opened and the contents had read into the collection, close the file and display the following menu:
-
+  ```
   1. Add new category
   2. Update category
     2.1 Update category
@@ -34,7 +34,7 @@ has opened and the contents had read into the collection, close the file and dis
   5. Order product
   6. Show order list report
   Others- Quit Program
-
+  ```
   Each menu choice should invoke an appropriate function to perform the selected menu item. Your program
 must display the menu after each task and wait for the user to select another option until the user chooses to quit the
 program.
@@ -137,4 +137,5 @@ program.
   * This function allows printing inventory reports of the store.
   
   • The above specifications are only basic information; you must perform a requirements analysis step and build the application according to real requirements.
+  
   • The lecturer will explain the requirement only once on the first slot of the assignment.
