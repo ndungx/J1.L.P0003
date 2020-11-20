@@ -1,11 +1,6 @@
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Scanner;
 
 /*
  * @author NDungx
@@ -13,7 +8,6 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
         int choice = 0;
         boolean cont = false;
         CategoryList obj = new CategoryList();
@@ -21,46 +15,26 @@ public class Main {
         Manager obj2 = new Manager(obj1);
         CreateFile obj3 = new CreateFile();
         HashMap<String, ArrayList<Order>> hm = new HashMap<>();
-        String timeStamp = new SimpleDateFormat("dd-MM").format(new Date());
-        
-        String fileNameCategory = "";
-        String fileNameProduct = "";
 
-        System.out.println("enter a name for category file to store data");
-        System.out.print("> ");
-        fileNameCategory = sc.nextLine();
-        sc = new Scanner(System.in);
-
-        System.out.println("\nenter a name for product file to store data");
-        System.out.print("> ");
-        fileNameProduct = sc.nextLine();
-        sc = new Scanner(System.in);
-
-        obj3.createFile(fileNameCategory, fileNameProduct);
-        try {
-            File fileOrder = new File("C:\\Users\\DELL\\Desktop\\Netbean project\\J1.L.P0003\\record\\order_" + timeStamp + ".txt");
-            fileOrder.createNewFile();
-        } catch (IOException e) {
-            System.err.println("something went wrong");
-        }
-
+        obj3.inputFilename();
         obj.loadCategoryFromFile();
         obj1.loadProductFromFile();
+        
         do {
             System.out.println("\n***** <Product  Management> *****");
-            System.out.println("* 1. add new category           *");
-            System.out.println("* 2. update category            *");
+            System.out.println("*  1. add new category          *");
+            System.out.println("*  2. update category           *");
             System.out.println("* \t2.1 update category     *");
             System.out.println("* \t2.2 delete category     *");
-            System.out.println("* 3. add new product            *");
-            System.out.println("* 4. update product             *");
+            System.out.println("*  3. add new product           *");
+            System.out.println("*  4. update product            *");
             System.out.println("* \t4.1 update product      *");
             System.out.println("* \t4.2 delete product      *");
-            System.out.println("* 5. order product              *");
-            System.out.println("* 6. show order list report     *");
-            System.out.println("* 7. save all change            *");
-            System.out.println("* 8. display all category       *");
-            System.out.println("* 9. display all product        *");
+            System.out.println("*  5. order product             *");
+            System.out.println("*  6. show order list report    *");
+            System.out.println("*  7. save all change           *");
+            System.out.println("*  8. display all category      *");
+            System.out.println("*  9. display all product       *");
             System.out.println("* 10. display order list report *");
             System.out.println("*********************************");
             System.out.println("******** enter 0 to exit ********");
@@ -96,8 +70,8 @@ public class Main {
                     obj2.viewOrder(hm);
                     break;
                 case 7:
-                    obj.saveToFile(fileNameCategory);
-                    obj1.saveToFile(fileNameProduct);
+                    obj.saveToFile(obj3.getFileNameCategory());
+                    obj1.saveToFile(obj3.getFileNameProduct());
                     break;
                 case 8:
                     System.out.println();
@@ -123,5 +97,4 @@ public class Main {
             }
         } while (choice >= 0 && choice <= 10);
     }
-
 }

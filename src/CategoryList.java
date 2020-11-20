@@ -67,8 +67,9 @@ public class CategoryList extends ArrayList<Category> {
                         if (nameCategory.trim().equalsIgnoreCase("exit")) {
                             return;
                         }
+                        //something went wrong with check duplicate name category
                         for (Category category : this) {
-                            if (category.getNameCategory().equalsIgnoreCase(nameCategory)) {
+                            if (category.getNameCategory().trim().equalsIgnoreCase(nameCategory)) {
                                 throw new Exception();
                             }
                         }
@@ -159,12 +160,14 @@ public class CategoryList extends ArrayList<Category> {
             if (Validation.checkInputUD()) {
                 updateCategory(res, idCategory);
                 System.out.println("\ndo you want to go back to main menu? (Y/N)");
+                System.out.print("> ");
                 if (!Validation.checkInputYN()) {
                     editCategory(productList);
                 }
             } else {
                 deleteCategory(res, idCategory, productList);
                 System.out.println("\ndo you want to go back to main menu? (Y/N)");
+                System.out.print("> ");
                 if (!Validation.checkInputYN()) {
                     editCategory(productList);
                 }
@@ -187,7 +190,7 @@ public class CategoryList extends ArrayList<Category> {
                     do {
                         updateNameCategory = sc.nextLine();
                         try {
-                            if (updateNameCategory.equalsIgnoreCase("exit")) {
+                            if (updateNameCategory.trim().equalsIgnoreCase("exit")) {
                                 return;
                             }
                             for (Category category : this) {
@@ -222,8 +225,8 @@ public class CategoryList extends ArrayList<Category> {
 
     //check product exist or not to delete category
     public boolean isExistProduct(ProductList productList, String idCategory) {
-        for (int i = 0; i < productList.size(); i++) {
-            if (productList.get(i).getCategoryID().equalsIgnoreCase(idCategory)) {
+        for (Product product : productList) {
+            if (product.getCategoryID().trim().equalsIgnoreCase(idCategory.trim())) {
                 return true;
             }
         }
@@ -290,14 +293,14 @@ public class CategoryList extends ArrayList<Category> {
                 return;
             }
             try {
-                file = new File("C:\\Users\\DELL\\Desktop\\Netbean project\\J1.L.P0003\\category\\" + fileName + ".txt");
+                file = new File("C:\\Users\\DELL\\Desktop\\Netbean project\\J1.L.P0003 (Extend)\\category\\" + fileName + ".txt");
                 fw = new FileWriter(file);
                 pw = new PrintWriter(fw);
                 for (Category category : this) {
                     pw.println(category.toString());
                     pw.flush();
                 }
-                System.out.println("\ncategory have been save to file 'category.txt'");
+                System.out.println("\ncategory have been save to file '" + fileName + ".txt'");
             } catch (IOException e) {
                 System.err.println("something went wrong when trying to save data to file");
             } finally {
@@ -310,7 +313,7 @@ public class CategoryList extends ArrayList<Category> {
                     }
                 } catch (IOException e) {
                     System.err.println("something went wrong");
-                }   
+                }
             }
         } else {
             if (this.isEmpty()) {
@@ -318,7 +321,7 @@ public class CategoryList extends ArrayList<Category> {
                 return;
             }
             try {
-                file = new File("C:\\Users\\DELL\\Desktop\\Netbean project\\J1.L.P0003\\category\\category.txt");
+                file = new File("C:\\Users\\DELL\\Desktop\\Netbean project\\J1.L.P0003 (Extend)\\category\\category.txt");
                 fw = new FileWriter(file);
                 pw = new PrintWriter(fw);
                 for (Category category : this) {
@@ -348,9 +351,10 @@ public class CategoryList extends ArrayList<Category> {
         BufferedReader bf = null;
         File directoryPath = null;
         ArrayList<Category> list = this;
+        //use set to remove all duplicate items
         HashSet<Category> hashSet = new HashSet(list);
         try {
-            directoryPath = new File("C:\\Users\\DELL\\Desktop\\Netbean project\\J1.L.P0003\\category");
+            directoryPath = new File("C:\\Users\\DELL\\Desktop\\Netbean project\\J1.L.P0003 (Extend)\\category");
             File filesList[] = directoryPath.listFiles();
             for (File file : filesList) {
                 fr = new FileReader(file);

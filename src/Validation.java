@@ -101,7 +101,8 @@ public class Validation {
                 }
                 return result;
             } catch (NumberFormatException e) {
-                System.err.println("Please input number in rage [" + min + ", " + max + "]");
+                System.err.println("Please input number in rage [0, " + max + "]");
+                System.out.println("if you want to exit, enter '-1'");
                 System.out.print("Enter again: ");
             }
         }
@@ -146,9 +147,15 @@ public class Validation {
                 }
                 return result;
             } catch (NumberFormatException e) {
-                System.err.println("\nPlease input number in rage [" + min + ", " + max + "]");
+                System.err.println("\nPlease input number in rage [0, " + max + "]");
+                System.out.println("if you want to exit, enter '-1'");
                 System.out.print("Enter again: ");
             }
         }
+    }
+    
+    public static boolean checkValidFilename(String s){
+        Pattern p = Pattern.compile("^[\\w\\s-]{1,30}$");
+        return p.matcher(s).find();
     }
 }

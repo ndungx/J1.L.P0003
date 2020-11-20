@@ -66,4 +66,16 @@ public class Product {
         return idProduct.stripLeading() + ", " + nameProduct.stripLeading() + ", " + price + ", " + quantity + ", " + categoryID.stripLeading() + "\n";
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Product) {
+            return ((Product) obj).idProduct.equals(idProduct);
+        }
+        return false;
+    }
+    
+    @Override
+    public int hashCode() {
+        return Integer.valueOf(this.idProduct);
+    }
 }

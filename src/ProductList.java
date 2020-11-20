@@ -97,15 +97,22 @@ public class ProductList extends ArrayList<Product> {
         } while (cont);
 
         System.out.print("\nenter price product (<999999$): ");
-        price = Validation.checkInputDoubleLimit(0.0, 999999.0);
+        price = Validation.checkInputDoubleLimit(-1, 999999.0);
+        if (price == -1) {
+            return;
+        }
         sc = new Scanner(System.in);
 
         System.out.print("\nenter quantity product (<999999 items): ");
         System.out.println();
-        quantity = Validation.checkInputIntLimit(0, 999999);
+        quantity = Validation.checkInputIntLimit(-1, 999999);
+        if (quantity == -1) {
+            return;
+        }
         sc = new Scanner(System.in);
 
         do {
+            System.out.println();
             if (!categoryList.isEmpty()) {
                 categoryList.forEach(System.out::println);
             } else {
@@ -124,20 +131,6 @@ public class ProductList extends ArrayList<Product> {
                     try {
                         if (!searchCategorybyID2(categoryID)) {
                             throw new Exception();
-                        } else {
-                            System.out.println("\ncategory ID " + categoryID + " is" + getCategoryName(categoryID));
-                            System.out.println("\ndo you want to change? (Y/N)");
-                            System.out.print("> ");
-                            try {
-                                if (Validation.checkInputYN()) {
-                                    throw new Exception();
-                                } else {
-                                    cont = false;
-                                }
-                            } catch (Exception e) {
-                                System.out.print("\nenter id category: ");
-                                cont = true;
-                            }
                         }
                         cont = false;
                     } catch (Exception e) {
@@ -280,9 +273,12 @@ public class ProductList extends ArrayList<Product> {
             switch (choice) {
                 case 1:
                     do {
-                        System.out.print("\nenter name product: ");
+                        System.out.print("\nenter name product (leave a blank to return menu update): ");
                         try {
                             updateNameProduct = sc.nextLine();
+                            if (updateNameProduct.equals("")) {
+                                break;
+                            }
                             if (updateNameProduct.trim().equalsIgnoreCase("exit")) {
                                 return;
                             }
@@ -309,7 +305,7 @@ public class ProductList extends ArrayList<Product> {
                                 throw new Exception();
                             }
                             String s = String.valueOf(updatePrice);
-                            if (s.equalsIgnoreCase("exit")) {
+                            if (s.trim().equalsIgnoreCase("exit")) {
                                 return;
                             }
                             if (!Validation.restrictDouble(s)) {
@@ -328,16 +324,19 @@ public class ProductList extends ArrayList<Product> {
                     break;
                 case 3:
                     System.out.print("\nenter quantity product (<999999): ");
-                    updateQuantity = Validation.checkInputIntLimit(1, 999999);
+                    updateQuantity = Validation.checkInputIntLimit(-1, 999999);
                     this.get(res).setQuantity(updateQuantity);
                     sc = new Scanner(System.in);
                     break;
                 case 4:
                     do {
-                        System.out.print("\nenter id category: ");
+                        System.out.print("\nenter id category (leave a blank to return menu update): ");
                         try {
                             do {
                                 updateCategory = sc.nextLine();
+                                if (updateCategory.equals("")) {
+                                    break;
+                                }
                                 if (updateCategory.trim().equalsIgnoreCase("exit")) {
                                     return;
                                 }
@@ -369,6 +368,9 @@ public class ProductList extends ArrayList<Product> {
                         System.out.print("\nenter name product: ");
                         try {
                             updateNameProduct = sc.nextLine();
+                            if (updateNameProduct.equals("")) {
+                                break;
+                            }
                             if (updateNameProduct.trim().equalsIgnoreCase("exit")) {
                                 return;
                             }
@@ -387,13 +389,16 @@ public class ProductList extends ArrayList<Product> {
                     } while (cont);
 
                     do {
-                        System.out.print("\nenter price product (<999999): ");
+                        System.out.print("\nenter price product: ");
                         try {
                             updatePrice = sc.nextDouble();
                             if (updatePrice > 999999) {
                                 throw new Exception();
                             }
                             String s = String.valueOf(updatePrice);
+                            if (s.equals("")) {
+                                break;
+                            }
                             if (s.trim().equalsIgnoreCase("exit")) {
                                 return;
                             }
@@ -421,6 +426,9 @@ public class ProductList extends ArrayList<Product> {
                         try {
                             do {
                                 updateCategory = sc.nextLine();
+                                if (updateCategory.equals("")) {
+                                    break;
+                                }
                                 if (updateCategory.trim().equalsIgnoreCase("exit")) {
                                     return;
                                 }
@@ -448,13 +456,11 @@ public class ProductList extends ArrayList<Product> {
                             cont = true;
                         }
                     } while (cont);
-                    sc = new Scanner(System.in);
                     break;
             }
+            System.out.println("\nupdate success");
+            System.out.println("\n" + this.get(res));
         } while (choice > 0 && choice <= 5);
-
-        System.out.println("\nupdate success");
-        System.out.println("\n" + this.get(res));
     }
 
     public void deleteProduct(int res, String idProduct) {
@@ -462,9 +468,9 @@ public class ProductList extends ArrayList<Product> {
         System.out.print("> ");
         if (Validation.checkInputYN()) {
             this.remove(this.get(res));
-            System.out.println("delete success");
+            System.out.println("\ndelete success");
         } else {
-            System.out.println("Product has not deleted");
+            System.out.println("\nProduct has not deleted");
         }
     }
 
@@ -540,7 +546,7 @@ public class ProductList extends ArrayList<Product> {
                 return;
             }
             try {
-                file = new File("C:\\Users\\DELL\\Desktop\\Netbean project\\J1.L.P0003\\product\\" + fileName + ".txt");
+                file = new File("C:\\Users\\DELL\\Desktop\\Netbean project\\J1.L.P0003 (Extend)\\product\\" + fileName + ".txt");
                 fw = new FileWriter(file);
                 pw = new PrintWriter(fw);
                 for (Product product : this) {
@@ -560,7 +566,7 @@ public class ProductList extends ArrayList<Product> {
                     }
                 } catch (IOException e) {
                     System.err.println("something went wrong");
-                }   
+                }
             }
         } else {
             if (this.isEmpty()) {
@@ -568,7 +574,7 @@ public class ProductList extends ArrayList<Product> {
                 return;
             }
             try {
-                file = new File("C:\\Users\\DELL\\Desktop\\Netbean project\\J1.L.P0003\\product\\product.txt");
+                file = new File("C:\\Users\\DELL\\Desktop\\Netbean project\\J1.L.P0003 (Extend)\\product\\product.txt");
                 fw = new FileWriter(file);
                 pw = new PrintWriter(fw);
                 for (Product product : this) {
@@ -592,15 +598,16 @@ public class ProductList extends ArrayList<Product> {
             }
         }
     }
-    
+
     public ArrayList<Product> loadProductFromFile() {
         FileReader fr = null;
         BufferedReader bf = null;
         File directoryPath = null;
         ArrayList<Product> list = this;
+        //use set to remove all duplicate items
         HashSet<Product> hashSet = new HashSet(list);
         try {
-            directoryPath = new File("C:\\Users\\DELL\\Desktop\\Netbean project\\J1.L.P0003\\product");
+            directoryPath = new File("C:\\Users\\DELL\\Desktop\\Netbean project\\J1.L.P0003 (Extend)\\product");
             File filesList[] = directoryPath.listFiles();
             for (File file : filesList) {
                 fr = new FileReader(file);
@@ -608,7 +615,7 @@ public class ProductList extends ArrayList<Product> {
                 while (bf.ready()) {
                     String s = bf.readLine();
                     String[] arr = s.split(",");
-                    if (arr.length == 2) {
+                    if (arr.length == 5) {
                         Product product = new Product(arr[0], arr[1], Double.parseDouble(arr[2].trim()), Integer.parseInt(arr[3].trim()), arr[4]);
                         hashSet.add(product);
                     }

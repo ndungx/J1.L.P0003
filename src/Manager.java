@@ -114,15 +114,15 @@ public class Manager {
             System.out.println();
             displayListProduct(productList);
             System.out.print("Enter item (type 0 to exit): ");
-            int item = Validation.checkInputIntLimit(0, productList.size());
-            if (item == 0) {
+            int item = Validation.checkInputIntLimit(-1, productList.size());
+            if (item == 0 || item == -1) {
                 return;
             }
             Product product = getProductByItem(productList, item);
             do {
                 System.out.print("\nEnter quantity (type 0 to exit): ");
-                quantity = Validation.checkInputIntLimit(0, 999999);
-                if (quantity == 0) {
+                quantity = Validation.checkInputIntLimit(-1, 999999);
+                if (quantity == 0 || quantity == -1) {
                     return;
                 }
                 sc = new Scanner(System.in);
@@ -132,7 +132,7 @@ public class Manager {
                 } else {
                     quantity = 0;
                     System.err.println("\ndont have enough quantity for " + product.getNameProduct());
-                    System.out.println("\n" + product.getNameProduct() + " now just have " + product.getQuantity());
+                    System.out.println("\n" + product.getNameProduct().trim() + " now just have " + product.getQuantity());
                 }
             } while (false);
             if (quantity != 0) {
@@ -153,6 +153,9 @@ public class Manager {
             System.out.print("\nEnter name: ");
             try {
                 name = sc.nextLine();
+                if (name.trim().equalsIgnoreCase("exit")) {
+                    return;
+                }
                 if (!Validation.restrictString(name)) {
                     throw new Exception();
                 }
@@ -167,6 +170,7 @@ public class Manager {
             } catch (Exception e) {
                 System.err.println("invalid name or have taken by other people");
                 System.err.println("name just have words and not empty\n");
+                System.out.println("if you want to exit, enter 'exit'");
                 cont = true;
             }
         } while (cont);
@@ -211,7 +215,7 @@ public class Manager {
     //case 8:
     public void printAllProductList() {
         try {
-            File directoryPath = new File("C:\\Users\\DELL\\Desktop\\Netbean project\\J1.L.P0003\\record");
+            File directoryPath = new File("C:\\Users\\DELL\\Desktop\\Netbean project\\J1.L.P0003 (Extend)\\record");
             File filesList[] = directoryPath.listFiles();
             System.out.println("List of records:");
             Scanner sc = null;
@@ -222,7 +226,7 @@ public class Manager {
                 StringBuffer sb = new StringBuffer();
                 while (sc.hasNextLine()) {
                     input = sc.nextLine();
-                    sb.append(input + " ");
+                    sb.append(input + "\n");
                 }
                 System.out.println("Inventory report: \n" + sb.toString());
                 System.out.println(" ");
@@ -242,17 +246,15 @@ public class Manager {
             return;
         }
         try {
-            file = new File("C:\\Users\\DELL\\Desktop\\Netbean project\\J1.L.P0003\\record\\order_" + fileTimestamp + ".txt");
+            file = new File("C:\\Users\\DELL\\Desktop\\Netbean project\\J1.L.P0003 (Extend)\\record\\order_" + fileTimestamp + ".txt");
             fw = new FileWriter(file);
             pw = new PrintWriter(fw);
-
             Set<String> keyset = hm.keySet();
             for (String key : keyset) {
                 pw.println(key + " -> " + hm.get(key).toString());
                 pw.println();
                 pw.flush();
             }
-
             System.out.println("\norder have been save file 'order.txt'");
         } catch (IOException e) {
             System.err.println("something went wrong when trying to save data to file");

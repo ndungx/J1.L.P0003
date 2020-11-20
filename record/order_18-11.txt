@@ -1,0 +1,4 @@
+dung -> [nameProduct: kem chocolate, price: 4.0, quantity: 1]
+
+phat -> [nameProduct: kem vani, price: 1.0, quantity: 1]
+

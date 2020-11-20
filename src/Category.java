@@ -37,7 +37,7 @@ public class Category {
     public String toString() {
         return idCategory.stripLeading() + ", " + nameCategory.stripLeading();
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Category) {
@@ -45,7 +45,7 @@ public class Category {
         }
         return false;
     }
-    
+
     @Override
     public int hashCode() {
         return Integer.valueOf(this.idCategory);
